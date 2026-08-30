@@ -1,0 +1,2 @@
+Vira project prepared with files at repository root.
+Upload the CONTENTS of this folder to the Vira-app repository root; do not upload this folder as a single nested folder.
