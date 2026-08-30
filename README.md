@@ -1,23 +1,35 @@
-# VIRA
+name: Build Vira APK
 
-نسخه اولیه اپلیکیشن VIRA برای خرید و فروش طلا و دلار.
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
-## اجرای محلی
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
 
-```bash
-flutter pub get
-flutter run
-```
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-## ساخت APK
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
 
-```bash
-flutter build apk --release
-```
+      - name: Flutter version
+        run: flutter --version
 
-## ساخت خودکار در GitHub
+      - name: Get dependencies
+        run: flutter pub get
 
-فایل `.github/workflows/build-apk.yml` با هر push به شاخه `main` یا اجرای دستی، APK را می‌سازد.
+      - name: Build APK
+        run: flutter build apk --release
 
-بعد از پایان Build:
-GitHub → Actions → Build VIRA APK → آخرین اجرای موفق → Artifacts → VIRA-APK
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vira-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
