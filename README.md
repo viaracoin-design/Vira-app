@@ -1,8 +1,10 @@
-# Vira App
-اپلیکیشن ویرا برای معرفی و مدیریت خدمات طلای آبشده و سکه.
+- name: Set up Flutter
+  uses: subosito/flutter-action@v2
+  with:
+    channel: stable
 
-## Build
-`flutter pub get`
-`flutter build apk --release`
+- name: Get dependencies
+  run: flutter pub get
 
-APK خروجی: `build/app/outputs/flutter-apk/app-release.apk`
+- name: Build APK
+  run: flutter build apk --release
